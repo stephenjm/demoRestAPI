@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--                                         -->
+<!-- @version $Id: demo-log4j.xml  -->
+<!--                                         -->
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+   <!-- As standard there is the choice of logging to the containers stdout, a file or a rolling file -->
+    <appender name="console-appender" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.SimpleLayout"/>
+    </appender>
+
+
+    <!-- Change the file location and other attributes to suit -->
+    <appender name="rolling-file-appender" class="org.apache.log4j.RollingFileAppender"> 
+        <param name="File" value="/usr/local/apache-tomcat/logs/rest-api.log"/>
+        <param name="Append" value="true"/> 
+        <param name="MaxFileSize" value="500KB"/> 
+        <param name="MaxBackupIndex" value="10" />
+        <param name="Encoding" value="UTF-8" />
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <param name="ConversionPattern" value="%d %-5p [%c{1}] %m%n"/> 
+        </layout> 
+    </appender>
+	
+	<!-- Change the file location and other attributes to suit -->
+    <appender name="audit-log-appender" class="org.apache.log4j.RollingFileAppender"> 
+        <param name="File" value="/usr/local/apache-tomcat/logs/rest-api-audit.log"/>
+        <param name="Append" value="true"/> 
+        <param name="MaxFileSize" value="10MB"/> 
+        <param name="MaxBackupIndex" value="10"/>
+        <param name="Encoding" value="UTF-8" />
+        <layout class="org.apache.log4j.PatternLayout"> 
+            <!--param name="ConversionPattern" value="%d %-5p [%c %M] %m%n"/--> 
+            <param name="ConversionPattern" value="%d{dd:MM:yy HH:mm:ss SSS}, %p %c %M, %m%n"/> 
+        </layout> 
+    </appender> 
+   
+    <logger name="com.demo.rest" additivity="false">
+        <level value="all" /> 
+        <appender-ref ref="console-appender"/>
+        <appender-ref ref="rolling-file-appender"/>
+       
+    </logger>	
+
+    
+    <logger name="com.demo.rest.util.AuditLog" additivity="false">
+        <level value="all" />
+        <appender-ref ref="console-appender"/>
+        <appender-ref ref="rolling-file-appender"/>
+    </logger>
+    
+    <!-- This is the general setting for the application -->
+    <!-- Do not modify these settings unless diagnosing a problem -->        
+    <root>
+        <priority value="all" />
+        <appender-ref ref="console-appender"/>
+        <appender-ref ref="rolling-file-appender"/>
+    </root>
+</log4j:configuration>

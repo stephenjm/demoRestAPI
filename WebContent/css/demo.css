@@ -1,0 +1,40 @@
+#formArea label {font-size:16px; font-weight:bold; color:#bc68c0;}
+
+#formArea input {position:static;width:15em; font-size:16px; font-weight:normal;}
+
+#formArea { 
+    display:none; /* Hide the DIV */
+    position:fixed;  
+    _position:absolute; /* hack for internet explorer 6 */  
+    width:600px;  
+    background:#FFFFFF;  
+    left: 300px; /* X-axis position is set to center position*/
+    top: 150px;  /* Y-axis position is set*/
+    z-index:100; /* Z-axis layering ( on-top of others - pop-up)*/
+    margin-left: 15px;  
+    overflow:auto;
+    /* The red slightly glowing border surrounding the pop-up div. Set to work with IE, Mozilla and Chrome*/ 
+    border:2px solid #bc68c0;      
+    padding:15px;  
+    font-size:15px; 
+    -moz-box-shadow: 0 0 5px #bc68c0;
+    -webkit-box-shadow: 0 0 5px #bc68c0;
+    box-shadow: 0 0 5px #bc68c0;
+    
+}/* This is for the positioning of the Close Link */
+#formAreaBoxClose {
+    font-size:20px;  
+    line-height:15px;  
+    right:5px;  
+    top:5px;  
+    position:absolute;  
+    color:#000000;  
+    font-weight:500;      
+}
+
+a:link {color:  #bc68c0; text-decoration: underline;}
+a:visited {color: #bc68c0; text-decoration: underline;}
+a:active {color:  #bc68c0; text-decoration: underline;}
+a:hover {color: #bc68c0; text-decoration: underline;}
+
+#mapid { height: 180px; }

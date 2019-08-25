@@ -1,0 +1,203 @@
+<project name="DEMO REST API" default="compile">	
+	<target name="init">	 
+		<property file="build.properties"/>
+		<property name="target" value="1.8"/>
+		<property name="debug" value="true"/>	
+		<property name="product_version_prefix" value="DEMO"/>
+		<property name="product_version" value="17"/>
+		<property name="component_version_prefix" value="Demo REST API"/> 
+		<property name="component_version" value="1.0"/>	
+		<property name="local_version" value="1.0"/>
+ 
+		<property name="pwd" value="./"/>
+		<property name="lib" value="./lib"/>
+		<property name="conf" value="./conf"/>		
+		<property name="bin" value="${pwd}/bin"/>
+		<property name="commonjars_dir" value="C:/dev/cvsroot/commonJars"/>
+		
+		<property name="pwd" value="./"/>
+		<property name="src" value="src"/>
+		<property name="directory" value="./"/>
+		<property name="resources" value="${pwd}/"/>
+		<property name="classes" value="classes"/>
+		<property name="web_inf" value="WebContent/WEB-INF"/>
+		
+		<property name="log4j_jar" value="log4j-1.2.17.jar"/>
+		<property name="commons-dbcp_jar" value="commons-dbcp-1.4.jar"/>
+		<property name="commons-pool_jar" value="commons-pool-1.5.6.jar"/>
+		<property name="commons-lang_jar" value="commons-lang-2.3.jar"/>
+
+		<property name="jackson-core-lgpl_jar" value="jackson-core-lgpl-1.9.12.jar"/>
+		<property name="jackson-jaxrs_jar" value="jackson-jaxrs-1.9.12.jar"/>
+		<property name="jackson-mapper-lgpl_jar" value="jackson-mapper-lgpl-1.9.12.jar"/>
+		<property name="jackson-xc_jar" value="jackson-xc-1.9.12.jar"/>
+		<property name="jersey-bundle_jar" value="jersey-bundle-1.17.jar"/>
+		<property name="jsr311_jar" value="jsr311-api-1.1.1.jar"/>
+
+		<property name="asm_jar" value="asm-3.3.1.jar"/>
+		<property name="jtds_jar" value="jtds-1.1.jar"/>
+		<property name="mysql-connector_jar" value="mysql-connector-java-5.1.13-bin.jar"/>
+		<property name="servlet-api_jar" value="servlet-api-2.5.jar"/>
+			
+		<property name="app_jar" value="demoRestApi.jar"/>
+		<property name="app_war" value="demoRestApi.war"/>
+
+		<tstamp></tstamp>
+		<buildnumber/>
+	</target>
+
+	<target name="clean" depends="init">
+		<delete dir="${classes}"/>
+		<delete dir="${lib}"/>
+		<delete dir="${bin}"/>	
+		<delete file="demoRestApi.zip"/>
+	</target>
+
+	<target name="prepare" depends="init">
+		<mkdir dir="${classes}" />		
+		<copy todir="${classes}" >
+			<fileset dir="${src}" casesensitive="yes" >
+				<patternset id="resources" >
+					<include name="**/*.xml"/>
+				</patternset>
+			</fileset>
+		</copy>
+		<mkdir dir="${bin}" />
+		<mkdir dir="${lib}" />
+	</target>
+	
+	<target name="compile" depends="prepare">		
+		<javac debug="true" target="${target}" srcdir="${src}" destdir="${classes}">
+			<classpath id="build.classpath">
+				<fileset dir="${commonjars_dir}">
+					<!--Commons jars-->
+					<include name="${commons-dbcp_jar}"/>
+					<include name="${commons-pool_jar}"/>
+					<include name="${servlet-api_jar}"/>
+					<include name="${commons-lang_jar}"/>
+
+					<!-- REST Specific jars-->
+					<include name="${jackson-core-lgpl_jar}"/>
+					<include name="${jackson-jaxrs_jar}"/>
+					<include name="${jackson-mapper-lgpl_jar}"/>
+					<include name="${jackson-xc_jar}"/>
+					<include name="${jersey-bundle_jar}"/>
+					<include name="${jsr311_jar}"/>
+					<include name="${asm_jar}"/>
+					<include name="${jtds_jar}"/>
+					
+					<!--Other jars-->
+					<include name="${log4j_jar}"/>
+					<include name="${mysql-connector_jar}"/>	
+				</fileset>			
+			</classpath>		
+		</javac>	
+	</target>
+
+	<target name="build-jar" depends="compile">		
+		<jar jarfile="${lib}/${app_jar}" index="true">
+			<fileset dir="${classes}">
+				<include name="com/demo/rest/**"/>
+			</fileset>
+						
+			<manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="JDK-Target" value="${target}"/>
+				<attribute name="Specification-Title" value="${component_version_prefix} DEMO JAR" /> 
+				<attribute name="Specification-Version" value="${component_version}" /> 
+				<attribute name="Specification-Vendor" value="${vendor}" /> 
+				<attribute name="Implementation-Title" value="${product_version_prefix}-${product_version}-${component_version_prefix}" /> 
+				<attribute name="Implementation-Version" value="${component_version}${local_version} ${TODAY} ${TSTAMP} BuildNumber: ${build.number}" /> 
+				<attribute name="Implementation-Vendor" value="${vendor}" />	 
+			</manifest>
+		</jar>	
+	</target>
+
+	<target name="build-war" depends="build-jar">
+		<war warfile="${bin}/${app_war}" webxml="${conf}/web.xml">
+			
+			<manifest>
+				<attribute name="Built-By" value="${user.name}"/>
+				<attribute name="JDK-Target" value="${target}"/>
+				<attribute name="Specification-Title" value="${component_version_prefix} WAR" /> 
+				<attribute name="Specification-Version" value="${component_version}" /> 
+				<attribute name="Specification-Vendor" value="${vendor}" /> 
+				<attribute name="Implementation-Title" value="${product_version_prefix}-${product_version}-${component_version_prefix}" /> 
+				<attribute name="Implementation-Version" value="${component_version}${local_version} ${TODAY} ${TSTAMP} BuildNumber: ${build.number}" /> 
+				<attribute name="Implementation-Vendor" value="${vendor}" />	 
+			</manifest>
+		
+			<lib dir="lib">
+				<include name="demoRestApi.jar"/>	
+			</lib>
+
+			<lib dir="${commonjars_dir}">
+				<!--Commons jars-->
+				<include name="${commons-dbcp_jar}"/>
+				<include name="${commons-pool_jar}"/>
+				<include name="${commons-lang_jar}"/>
+
+				<!-- REST Specific jars-->
+				<include name="${jackson-core-lgpl_jar}"/>
+				<include name="${jackson-jaxrs_jar}"/>
+				<include name="${jackson-mapper-lgpl_jar}"/>
+				<include name="${jackson-xc_jar}"/>
+				<include name="${jersey-bundle_jar}"/>
+				<include name="${jsr311_jar}"/>
+				<include name="${asm_jar}"/>
+				<include name="${jtds_jar}"/>
+
+				<!--Other jars-->
+				<include name="${log4j_jar}"/>
+				<include name="${mysql-connector_jar}"/>
+			 </lib>		
+				
+			<classes dir="${conf}">
+				<include name="**/*.properties"/>
+				<include name="log4j.dtd"/>
+				<include name="log4j.xml"/>
+			</classes>	
+			
+			<fileset dir="WebContent">
+				<include name="demo.jsp"/>
+				<include name="js/**"/>
+				<include name="css/**"/>
+			</fileset>
+		</war>
+	</target>
+	
+	<target name="generate-javadoc" depends="compile">
+		<javadoc packagenames="com.demo.rest.*"		
+						destdir="docs/api"
+						author="true"
+						version="true"
+						use="false"
+						public="true"
+						sourcepath="${src}"
+						windowtitle="DEMO REST API Specification" 
+						classpathref="build.classpath">
+				
+			<doctitle><![CDATA[<h1>DEMO REST API</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright 2019 SJM. All Rights Reserved.</i>]]></bottom>
+		</javadoc>
+		<zip destfile="demoRestApi.zip" basedir="docs/"/>
+	</target>	
+</project>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: xml
+sgml-omittag:nil
+sgml-shorttag:nil
+sgml-namecase-general:nil
+sgml-general-insert-case:lower
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

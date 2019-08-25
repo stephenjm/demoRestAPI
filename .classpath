@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/commons-dbcp-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/commons-lang-2.3.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/commons-pool-1.5.6.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/jackson-core-lgpl-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/jackson-jaxrs-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/jackson-mapper-lgpl-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/jackson-xc-1.9.12.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/jersey-bundle-1.17.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/jsr311-api-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/jtds-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/mysql-connector-java-5.1.13-bin.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/servlet-api-2.5.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/asm-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/dev/cvsroot/commonJars/log4j-1.2.17.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
