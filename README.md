@@ -10,4 +10,7 @@ Requirements:
 2. Apache Tomcat - tested with 8.5
 3. ANT builder to create jar and war file
 
-Update the rest-api.properties file with the full path to the csv file before build war file.
+Before running ANT to execute the build.xml targets, do the following:
+1. Run the create.sql script to add the two tables to the schema.
+2. Update the rest-api.properties file with the database username and password to match the credentials you've configured in your MySQL instance.
+3. Update the rest-api.properties file with the full path to the csv file.
