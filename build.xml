@@ -13,7 +13,7 @@
 		<property name="lib" value="./lib"/>
 		<property name="conf" value="./conf"/>		
 		<property name="bin" value="${pwd}/bin"/>
-		<property name="commonjars_dir" value="C:/dev/cvsroot/commonJars"/>
+		<property name="3rd_party_libs" value="./conf/3rd_party_libs"/>
 		
 		<property name="pwd" value="./"/>
 		<property name="src" value="src"/>
@@ -69,7 +69,7 @@
 	<target name="compile" depends="prepare">		
 		<javac debug="true" target="${target}" srcdir="${src}" destdir="${classes}">
 			<classpath id="build.classpath">
-				<fileset dir="${commonjars_dir}">
+				<fileset dir="${3rd_party_libs}">
 					<!--Commons jars-->
 					<include name="${commons-dbcp_jar}"/>
 					<include name="${commons-pool_jar}"/>
@@ -131,7 +131,7 @@
 				<include name="demoRestApi.jar"/>	
 			</lib>
 
-			<lib dir="${commonjars_dir}">
+			<lib dir="${3rd_party_libs}">
 				<!--Commons jars-->
 				<include name="${commons-dbcp_jar}"/>
 				<include name="${commons-pool_jar}"/>

@@ -24,7 +24,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 	    "county",
 	    "construction",
 	    "point_latitude",
-	    "point_longitude"
+	    "point_longitude",
+	    "notes"
 	})
 public class QueryResponse {
 	private int policyID;
@@ -33,6 +34,7 @@ public class QueryResponse {
 	private String construction;
 	private Float pointLatitude;
 	private Float pointLongitude;
+	private String notes;
 	
 	private static Logger logger = Logger.getLogger(QueryResponse.class);
 	
@@ -46,6 +48,7 @@ public class QueryResponse {
 			setConstruction(queryResult.getString("construction"));
 			setPointLatitude(queryResult.getFloat("point_latitude"));
 			setPointLongitude(queryResult.getFloat("point_longitude"));
+			setNotes(queryResult.getString("notes"));
 		} catch(Exception e){
 			logger.log(Level.ERROR,e);
 		}
@@ -100,7 +103,16 @@ public class QueryResponse {
 	}
 
 
-    public static final Comparator<QueryResponse> sortByCounty = new Comparator<QueryResponse>() {
+    public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+
+
+	public static final Comparator<QueryResponse> sortByCounty = new Comparator<QueryResponse>() {
         public int compare(QueryResponse message1, QueryResponse message2) {
         	return message1.getCounty().compareTo(message2.getCounty());       	
         }

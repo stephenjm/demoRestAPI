@@ -20,7 +20,7 @@
 	</head>
 	<body class="yui-skin-sam demo-skin">
 		<div id="top1">
-		  	<h2>Demo Random Data</h2>
+		  	<h2>Modified text</h2>
 		</div>
 		<div id="mapid"></div>
 		<table width="100%" height="100%" cellspacing="2" cellpading="5" style="border:0">
@@ -31,7 +31,7 @@
 							<tr width="100%">
 								<td valign="top" halign="left" width="100%">
 									<table width="100%" height="100%" ><tr><td  overflow="auto">
-										<div id="render" class="example yui3-skin-sam" style="height:530px; width:100%; overflow:auto"></div>
+										<div id="render" class="yui3-skin-sam" style="height:530px; width:100%; overflow:auto"></div>
 										</td></tr>
 										<tr><td width="100%"  height="10%">
 											<div id="buttonArea"></div>
@@ -61,7 +61,11 @@
 													<td><input type="text" title="This is the latitude" id="latitude" name="latitude" style="width: 100%; text-align:left" maxlength="7"/>
 												<tr><td><label>Longitude</label>
 													<td><input type="text"  title="This is the longitude" id="longitude" name="longitude" style="width: 100%; text-align:left" maxlength="7"/>
+												<tr><td><label>Notes</label>
+													<td><input type="text"  title="This is the Notes" id="notes" name="notes" style="width: 100%; text-align:left"/>
+													
 													</td></tr>
+													
 											</table>					
 											<div id="formButtonArea"  width="90%" align="center">
 												<button class="demo-button" id="demoCreate" style="width:23%">Create</button>

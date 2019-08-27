@@ -56,7 +56,7 @@ function builddemoList(data){
         tempSource = new Y.DataSource.Local({source: data});
         tempSource .plug(Y.Plugin.DataSourceJSONSchema, {
             schema: {
-                resultFields: ["policyID","statecode","county","construction","pointLatitude","pointLongitude"]
+                resultFields: ["policyID","statecode","county","construction","pointLatitude","pointLongitude","notes"]
             }
         });
 
@@ -93,7 +93,8 @@ function builddemoList(data){
             {key:"county", label:"County", sortable:true, allowHTML: true, title: 'This is the county', name:"County", width:"25%"},
             {key:"construction", label:"Construction", sortable:true, allowHTML: true, title: 'This is the construction', name:"construction", width:"10%"},
             {key:"pointLatitude", label:"Latitude", sortable:true, allowHTML: true, title: 'This is the latitude', name:"pointLatitude"},
-            {key:"pointLongitude", label:"Longitude", sortable:true, allowHTML: true, title: 'This is the longitude', name:"pointLongitude"}
+            {key:"pointLongitude", label:"Longitude", sortable:true, allowHTML: true, title: 'This is the longitude', name:"pointLongitude"},
+            {key:"notes", label:"Notes", allowHTML: true, title: 'This is the notes', name:"notes"}
         ];
         
         table = new Y.DataTable({
@@ -107,7 +108,7 @@ function builddemoList(data){
 			highlightMode: 'cell',
 			selectionMode: 'row',
 			selectionMulti: true,
-            sortable: ['policyID','statecode','county','construction','pointatitude','pointLongitude'],
+            sortable: ['policyID','statecode','county','construction','pointLatitude','pointLongitude'],
 			rowsPerPage: 15,
 			pageSizes: [15, 30, 45, 60, 'Show All']
         }); 
@@ -134,6 +135,7 @@ function builddemoList(data){
 			demoLive.construction = array[0].tr._node.cells[3].innerText;
 			demoLive.pointLatitude = array[0].tr._node.cells[4].innerText;
 			demoLive.pointLongitude = array[0].tr._node.cells[5].innerText;
+			demoLive.notes = array[0].tr._node.cells[6].innerText;
 			
         	$('#insert').hide();
         	$('#edit').show();
@@ -236,7 +238,8 @@ function builddemoForm(data){
 	$('#demoForm').find('input#county').val(data.county);	
 	$('#demoForm').find('input#construction').val(data.construction);	
 	$('#demoForm').find('input#latitude').val(data.pointLatitude);	
-	$('#demoForm').find('input#longitude').val(data.pointLongitude);	
+	$('#demoForm').find('input#longitude').val(data.pointLongitude);
+	$('#demoForm').find('input#notes').val(data.notes);	
 	return false;
 }
 
@@ -340,16 +343,11 @@ $('#demoForm #demoUpdate').click(function() {
 	} else{
 		updatedemoData(
 				demoLive.policyID,
-				demoLive.statecode,
-				demoLive.county,
-				demoLive.construction,
-				demoLive.pointLatitude,
-				demoLive.pointLongitude,
 				$('#demoForm').serialize());		
 		return false;
 	}
 });	
-function updatedemoData(policyID,statecode,county,construction,latitude,longitude,formData){
+function updatedemoData(policyID,formData){
 	console.log('updatedemoData');
 	var updatedURL = rootURL + '/data/'+policyID;
 	if(!validatePolicyID(policyID)){

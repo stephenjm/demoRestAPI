@@ -109,13 +109,14 @@ public class Resource {
 			@FormParam("county")String county,
 			@FormParam("construction")String construction,
 			@FormParam("latitude")String latitude,
-			@FormParam("longitude")String longitude) {
+			@FormParam("longitude")String longitude,
+			@FormParam("notes")String notes) {
 		
 		Response rs = null;
 		if(policyID > 0){
 			try {
-				logger.info(statecode+county+construction);
-				boolean result1 = DAO.insertDataToDemoTableByID(policyID,statecode,county,construction); 
+				logger.debug(statecode+county+construction+notes);
+				boolean result1 = DAO.insertDataToDemoTableByID(policyID,statecode,county,construction,notes); 
 				boolean result2 = DAO.insertDataToGeoTableByID(policyID,Float.valueOf(latitude),Float.valueOf(longitude));
 				rs = getTextResponse("/data added successfully");
 				
@@ -141,13 +142,14 @@ public class Resource {
 			@FormParam("county")String county,
 			@FormParam("construction")String construction,
 			@FormParam("latitude")String latitude,
-			@FormParam("longitude")String longitude) {
+			@FormParam("longitude")String longitude,
+			@FormParam("notes")String notes) {
 		
 		Response rs = null;
 		if(policyID > 0){
 			try {
 				logger.info(statecode+county+construction);
-				int result = DAO.updateDemoTableByID(policyID,statecode,county,construction) +
+				int result = DAO.updateDemoTableByID(policyID,statecode,county,construction,notes) +
 						DAO.updateGeoTableByID(policyID,Float.valueOf(latitude),Float.valueOf(longitude));
 				
 				if(result > 0) {

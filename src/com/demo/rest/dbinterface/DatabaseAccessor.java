@@ -143,7 +143,8 @@ public class DatabaseAccessor {
 			.append(temp[0]).append(",")
 			.append("'").append(temp[1]).append("',")
 			.append("'").append(temp[2]).append("',")
-			.append("'").append(temp[16]).append("'),");
+			.append("'").append(temp[16]).append("',")
+			.append("''),");
 			
 			table2Query.append("(")
 			.append(temp[0]).append(",")
@@ -178,19 +179,22 @@ public class DatabaseAccessor {
 		return result;
 	}
 
-	public boolean insertDataToDemoTableByID(int policyID, String statecode, String county, String construction) throws ClassNotFoundException {
+	public boolean insertDataToDemoTableByID(int policyID, String statecode, String county, String construction, String notes) throws ClassNotFoundException {
 
 		boolean result = false;
 		Class.forName("com.mysql.jdbc.Driver");
 		try(
 				Connection c = getDbConnection();
-				PreparedStatement pstmt = c.prepareStatement(Queries.insertDemoTableData.concat("(?,?,?,?)"))) {
+				PreparedStatement pstmt = c.prepareStatement(Queries.insertDemoTableData.concat("(?,?,?,?,?)"))) {
 			
 			pstmt.setInt(1, policyID);
 			pstmt.setString(2, statecode);
 			pstmt.setString(3, county);
 			pstmt.setString(4, construction);
+			pstmt.setString(5, notes);
 			
+			logger.info("notes: "+notes);
+			logger.info(pstmt.toString());
 			result = pstmt.execute();
 
 		} catch (SQLException e) {
@@ -270,7 +274,7 @@ public class DatabaseAccessor {
 	
 	//UPDATE
 	public int updateDemoTableByID(int policyID, String statecode,
-			String county, String construction) throws SQLException, Exception {
+			String county, String construction, String notes) throws SQLException, Exception {
 		
 		int result = -1;
 		
@@ -283,7 +287,8 @@ public class DatabaseAccessor {
 				ps.setString(1, statecode);
 				ps.setString(2, county);
 				ps.setString(3, construction);
-				ps.setInt(4, policyID);
+				ps.setString(4, notes);
+				ps.setInt(5, policyID);
 				
 				result  = ps.executeUpdate();
 								
