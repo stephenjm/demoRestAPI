@@ -4,12 +4,11 @@
 		<property name="target" value="1.8"/>
 		<property name="debug" value="true"/>	
 		<property name="product_version_prefix" value="DEMO"/>
-		<property name="product_version" value="17"/>
+		<property name="product_version" value="1"/>
 		<property name="component_version_prefix" value="Demo REST API"/> 
 		<property name="component_version" value="1.0"/>	
 		<property name="local_version" value="1.0"/>
  
-		<property name="pwd" value="./"/>
 		<property name="lib" value="./lib"/>
 		<property name="conf" value="./conf"/>		
 		<property name="bin" value="${pwd}/bin"/>
@@ -17,8 +16,6 @@
 		
 		<property name="pwd" value="./"/>
 		<property name="src" value="src"/>
-		<property name="directory" value="./"/>
-		<property name="resources" value="${pwd}/"/>
 		<property name="classes" value="classes"/>
 		<property name="web_inf" value="WebContent/WEB-INF"/>
 		
@@ -103,12 +100,10 @@
 			<manifest>
 				<attribute name="Built-By" value="${user.name}"/>
 				<attribute name="JDK-Target" value="${target}"/>
-				<attribute name="Specification-Title" value="${component_version_prefix} DEMO JAR" /> 
+				<attribute name="Specification-Title" value="${component_version_prefix} JAR" /> 
 				<attribute name="Specification-Version" value="${component_version}" /> 
-				<attribute name="Specification-Vendor" value="${vendor}" /> 
 				<attribute name="Implementation-Title" value="${product_version_prefix}-${product_version}-${component_version_prefix}" /> 
 				<attribute name="Implementation-Version" value="${component_version}${local_version} ${TODAY} ${TSTAMP} BuildNumber: ${build.number}" /> 
-				<attribute name="Implementation-Vendor" value="${vendor}" />	 
 			</manifest>
 		</jar>	
 	</target>
@@ -121,10 +116,8 @@
 				<attribute name="JDK-Target" value="${target}"/>
 				<attribute name="Specification-Title" value="${component_version_prefix} WAR" /> 
 				<attribute name="Specification-Version" value="${component_version}" /> 
-				<attribute name="Specification-Vendor" value="${vendor}" /> 
 				<attribute name="Implementation-Title" value="${product_version_prefix}-${product_version}-${component_version_prefix}" /> 
 				<attribute name="Implementation-Version" value="${component_version}${local_version} ${TODAY} ${TSTAMP} BuildNumber: ${build.number}" /> 
-				<attribute name="Implementation-Vendor" value="${vendor}" />	 
 			</manifest>
 		
 			<lib dir="lib">
