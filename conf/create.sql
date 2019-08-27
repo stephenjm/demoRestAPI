@@ -1,3 +1,5 @@
+CREATE DATABASE `demoschema` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
 CREATE TABLE `demo_table` (
   `policyID` int(11) NOT NULL,
   `statecode` varchar(2) NOT NULL,
